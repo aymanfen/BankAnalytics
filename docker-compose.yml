@@ -1,12 +1,13 @@
 version: "3.8"
 
 services:
+
   clickhouse:
     image: clickhouse/clickhouse-server:latest
     container_name: clickhouse
     ports:
-      - "8123:8123"   # HTTP interface for queries (and UI backend)
-      - "9000:9000"   # Native client
+      - "8123:8123"   # HTTP
+      - "9000:9000"   # Native
     volumes:
       - clickhouse:/var/lib/clickhouse
     environment:
@@ -14,23 +15,22 @@ services:
       CLICKHOUSE_USER: default
       CLICKHOUSE_PASSWORD: ""
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+      
 
-
-  python:
-    image: python:3.12-slim
-    container_name: Python
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    depends_on:
+      - clickhouse
     ports:
-      - "3000:3000"  # Dagster UI
-    volumes:
-      - ./dbt:/usr/app/dbt
-      - ./dagster:/usr/app/dagster
-    working_dir: /usr/app
+      - "3001:3000"
     environment:
-      DAGSTER_HOME: /usr/app/dagster
-      DBT_PROFILES_DIR: /usr/app/dbt
-    tty: true
-    stdin_open: true
-    command: bash -c "tail -f /dev/null"
+      MB_DB_TYPE: h2
+      JAVA_TIMEZONE: UTC
+    volumes:
+      - metabase:/metabase-data
 
+  
 volumes:
   clickhouse:
+  metabase:

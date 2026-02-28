@@ -1,0 +1,53 @@
+{
+  "ConsolidatedAssets": [
+    "Loans & receivables to credit institutions at amortised cost",
+    "Loans & receivables to customers at amortised cost",
+    "TOTAL ASSETS",
+    "Prêts et créances sur les Etablissements de crédit et assimilés, au coût amorti",
+    "Prêts et créances sur la clientèle, au coût amorti",
+    "TOTAL"
+  ],
+  "ConsolidatedLiabilities": [
+    "Deposits from credit institutions",
+    "Deposits from customers",
+    "Shareholders' equity",
+    "TOTAL LIABILITIES",
+    "Dettes envers les Etablissements de crédit et assimilés",
+    "Dettes envers la clientèle",
+    "Capitaux propres",
+    "TOTAL"
+  ],
+  "ConsolidatedIncomeStatement":[
+    "NET BANKING INCOME",
+    "Total operating expenses",
+    "NET INCOME",
+    "PRODUIT NET BANCAIRE",
+    "Charges générales d'exploitation",
+    "Résultat net"
+  ],
+  "Assets": [
+    "Loans and advances to credit institutions and similar establishments",
+    "Loans and advances to customers",
+    "TOTAL ASSETS",
+    "Créances sur les établissements de crédit et assimilés",
+    "Créances sur la clientèle",
+    "Total de l'Actif"
+  ],
+  "Liabilities": [
+    "Amounts owing to credit institutions and similar establishments",
+    "Customer deposits",
+    "TOTAL LIABILITIES",
+    "Dettes envers les établissements de crédit et assimilés",
+    "Dépôts de la clientèle",
+    "Total du Passif"
+  ],
+  "IncomeStatement":[
+    "NET BANKING INCOME",
+    "OPERATING EXPENSES",
+    "NET INCOME FOR THE FINANCIAL YEAR",
+    "PRODUIT NET BANCAIRE",
+    "CHARGES GÉNÉRALES D'EXPLOITATION",
+    "RÉSULTAT NET DE L'EXERCICE"
+  ]
+
+}

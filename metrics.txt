@@ -1,0 +1,25 @@
+
+Income Statement Metrics 
+1-Produit Net Bancaire 
+2-Resultat Net
+3-Net Margin = Resultat Net / PNB
+4-Cost to Income = charge d'exploitation / produit net Bancaire
+
+Balance Sheet Metrics ( Assets nd Liabilities )
+1-Total Assets
+2-Total Liabilities
+3-Equity ( capitaux propres)
+
+Profitability Ratios
+1-ROA = Resultat Net / Total Assets
+2-ROE = Resultat Net / Equity
+
+Structure Ratios
+1-Leverage = Total Assets / Equity'
+2-Equity Ratio = Equity / Total Assets
+3-Loans to Deposits = Creances clientele / dettes clientele
+
+Growth Metrics
+1-PNB growth YoY QoQ
+2-Net Income growth YoY QoQ
+3-Assets Growth YoY QoQ
