@@ -3,66 +3,60 @@ from openpyxl import Workbook
 import json
 import os
 import re
-
-
-filename = "CDMQ32025.xlsx"
-
-# Configuration
-input_file = f"Reports/{filename}"
-config_file = "ETL/indicators.json"
-output_file = f"Reports/Cleaned/{filename}"
+import sys
 
 
 # -------------------------------------------------------
-# Load Configuration
+# ARGUMENT
 # -------------------------------------------------------
-def load_config(config_file):
-    file_ext = os.path.splitext(config_file)[1].lower()
+if len(sys.argv) < 2:
+    print("Usage: python script.py <excel_file>")
+    sys.exit(1)
 
-    if file_ext == ".json":
-        with open(config_file, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {}
+filename = sys.argv[1]
+
+input_file = f"../Reports/Excel/{filename}"
+output_file = f"../Reports/Cleaned/{filename}"
+
+# Bank config file
+bank = filename[:3]
+config_file = f"Config/{bank}.json"
 
 
 # -------------------------------------------------------
-# Normalize Indicator Names
+# LOAD CONFIG
 # -------------------------------------------------------
-def normalize_indicator(text):
-    """
-    Clean indicator name:
-    - lowercase
-    - remove everything from start until first letter OR digit
-    - remove dots
-    - remove +/- or ± inside text
-    - normalize spaces
-    """
+def load_config(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+# -------------------------------------------------------
+# NORMALIZE TEXT
+# -------------------------------------------------------
+def normalize_text(text):
     if not isinstance(text, str):
-        return text
+        return ""
 
     text = text.strip().lower()
 
-    # 🔥 Remove everything before first letter OR digit
     text = re.sub(r"^[^a-zA-Z0-9]+", "", text)
-
-    # Remove dots
     text = text.replace(".", "")
-
-    # Remove +/- and ± inside text
     text = text.replace("+/-", "")
     text = text.replace("±", "")
 
-    # Normalize multiple spaces
     text = re.sub(r"\s+", " ", text)
 
     return text.strip()
 
 
 # -------------------------------------------------------
-# Number Detection
+# NUMBER DETECTION
 # -------------------------------------------------------
 def is_number(s):
-    s = s.strip()
+
+    s = str(s).strip()
+
     test = s.replace(" ", "").replace(",", "")
 
     if test.startswith("-"):
@@ -75,135 +69,133 @@ def is_number(s):
 
 
 # -------------------------------------------------------
-# Process Sheet
+# FIND INDICATOR (supports multi-line)
 # -------------------------------------------------------
-def process_sheet(lines, indicator_names):
+def find_indicator(lines, start_index, indicators):
+
+    combined = normalize_text(lines[start_index])
+
+    if combined in indicators:
+        return combined, start_index
+
+    j = start_index + 1
+
+    while j < len(lines) and not is_number(lines[j]):
+
+        combined += " " + normalize_text(lines[j])
+
+        if combined in indicators:
+            return combined, j
+
+        j += 1
+
+    return None, start_index
+
+
+# -------------------------------------------------------
+# PROCESS SHEET
+# -------------------------------------------------------
+def process_sheet(lines, sheet_config):
+
+    indicators = sheet_config.get("rows to extract", [])
+    standardization = sheet_config.get("standardization", {})
+
+    indicators_norm = {normalize_text(x): x for x in indicators}
+
     result = []
-
-    normalized_indicators = set(indicator_names)
-
-    # Preserve first 3 rows (cleaned)
-    if len(lines) >= 3:
-        result.extend([normalize_indicator(x) for x in lines[:3]])
-        i = 3
-    else:
-        i = 0
+    i = 0
 
     while i < len(lines):
 
-        original_line = lines[i]
+        indicator_found, last_row = find_indicator(lines, i, indicators_norm)
 
-        # Skip standalone numbers
-        if is_number(original_line):
-            i += 1
-            continue
+        if indicator_found:
 
-        normalized_line = normalize_indicator(original_line)
+            original_indicator = indicators_norm[indicator_found]
 
-        # --------------------------------------------------
-        # 1️⃣ Exact Match (ONLY if in JSON)
-        # --------------------------------------------------
-        if normalized_line in normalized_indicators:
-            result.append(normalized_line)
+            # Standardized name
+            standardized = standardization.get(original_indicator, original_indicator)
+
+            result.append(standardized)
 
             numbers = []
-            j = i + 1
 
-            while j < len(lines) and is_number(lines[j]) and len(numbers) < 2:
-                numbers.append(lines[j])
+            j = last_row + 1
+
+            while j < len(lines) and len(numbers) < 2:
+
+                if is_number(lines[j]):
+                    numbers.append(lines[j])
+
                 j += 1
 
             while len(numbers) < 2:
-                numbers.append("-")
+                numbers.append("0")
 
             result.extend(numbers)
+
             i = j
-            continue
 
-        # --------------------------------------------------
-        # 2️⃣ Multi-line Match (ONLY if in JSON)
-        # --------------------------------------------------
-        combined = normalized_line
-        j = i + 1
-        found_match = False
-
-        while j < len(lines) and not is_number(lines[j]):
-            combined += " " + normalize_indicator(lines[j])
-
-            if combined in normalized_indicators:
-                found_match = True
-                break
-
-            j += 1
-
-        if found_match:
-            result.append(combined)
-
-            numbers = []
-            k = j + 1
-
-            while k < len(lines) and is_number(lines[k]) and len(numbers) < 2:
-                numbers.append(lines[k])
-                k += 1
-
-            while len(numbers) < 2:
-                numbers.append("-")
-
-            result.extend(numbers)
-            i = k
-            continue
-
-        # --------------------------------------------------
-        # ❌ NOT in JSON → IGNORE COMPLETELY
-        # --------------------------------------------------
-        i += 1
+        else:
+            i += 1
 
     return result
 
+
 # -------------------------------------------------------
-# MAIN EXECUTION
+# MAIN
 # -------------------------------------------------------
 
-indicators_config = load_config(config_file)
+config = load_config(config_file)
 
-# Normalize config indicators once
-for sheet in indicators_config:
-    indicators_config[sheet] = [
-        normalize_indicator(ind) for ind in indicators_config[sheet]
-    ]
+if filename not in config:
+    print(f"No config found for file {filename}")
+    sys.exit(1)
 
-excel_file = pd.ExcelFile(input_file)
-sheet_names = excel_file.sheet_names
+file_config = config[filename]
+
+
+excel = pd.ExcelFile(input_file)
+sheet_names = excel.sheet_names
 
 wb = Workbook()
 wb.remove(wb.active)
 
-for sheet_name in sheet_names:
-    print(f"Processing sheet: {sheet_name}")
+for sheet in sheet_names:
 
-    df = pd.read_excel(input_file, sheet_name=sheet_name, header=None)
+    print(f"Processing sheet: {sheet}")
 
-    raw_lines = df[0].dropna().astype(str).tolist()
-    lines = [line.strip() for line in raw_lines if line.strip()]
+    sheet_config = file_config.get(sheet)
 
-    indicator_names = indicators_config.get(sheet_name, [])
+    if not sheet_config or "rows to extract" not in sheet_config:
+        print("  No extraction config → skipping")
+        continue
 
-    result = process_sheet(lines, indicator_names)
+    df = pd.read_excel(input_file, sheet_name=sheet, header=None)
 
-    ws = wb.create_sheet(title=sheet_name)
+    lines = (
+        df.astype(str)
+        .stack()
+        .dropna()
+        .astype(str)
+        .str.strip()
+        .tolist()
+    )
 
-    
+    result = process_sheet(lines, sheet_config)
 
-    for idx, value in enumerate(result, start=1):
-        ws[f"A{idx}"] = value
+    ws = wb.create_sheet(title=sheet)
 
     ws["A1"] = "Results"
     ws.column_dimensions["A"].width = 80
 
-    print(f"  Completed: {len(result)} rows created")
+    for idx, val in enumerate(result, start=2):
+        ws[f"A{idx}"] = val
+
+    print(f"  Extracted {len(result)//3} indicators")
+
 
 wb.save(output_file)
 
-print("\nAll sheets processed successfully!")
-print(f"Output file saved as: {output_file}")
-print(f"Total sheets processed: {len(sheet_names)}")
+print("\nDone")
+print(f"Saved cleaned file → {output_file}")

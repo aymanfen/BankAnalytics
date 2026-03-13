@@ -1,0 +1,104 @@
+{
+    "ATWQ12025.xlsx":{
+        "ConsolidatedAssets":{
+            "rows to extract":[
+                "Loans & receivables to credit institutions at amortised cost",
+                "Loans & receivables to customers at amortised cost",
+                "TOTAL ASSETS"],
+            "standardization":{
+                "Loans & receivables to credit institutions at amortised cost":
+                "InstitutionsLoans",
+                "Loans & receivables to customers at amortised cost":
+                "CustomersLoans",
+                "TOTAL ASSETS":
+                "TotalAssets"
+            }
+        },
+        "ConsolidatedLiabilities":{
+            "rows to extract":[
+                "Deposits from credit institutions",
+                "Deposits from customers",
+                "Shareholders' equity",
+                "TOTAL LIABILITIES"],
+            "standardization":{
+                "Deposits from credit institutions":
+                "InstitutionsCredit",
+                "Deposits from customers":
+                "CustomersCredit",
+                "Shareholders' equity":
+                "PrivateEquity",
+                "TOTAL LIABILITIES":
+                "TotalLiabilities"
+            }
+        },
+        "ConsolidatedIncomeStatement":{
+            "rows to extract":[
+                "NET BANKING INCOME",
+                "total operating expenses",
+                "NET INCOME"
+            ],
+            "standardization":{
+                "NET BANKING INCOME":"NetBankingIncome",
+                "total operating expenses":"OperatingExpenses",
+                "NET INCOME":"NetIncome"
+            }
+        },
+        "Assets":{
+            "rows to extract":[
+                "Loans and advances to credit institutions and similar establishments",
+                "Loans and advances to customers",
+                "TOTAL ASSETS"
+            ],
+            "standardization":{
+                "Loans and advances to credit institutions and similar establishments":"InstitutionsLoans",
+                "Loans and advances to customers":"CustomersLoans",
+                "TOTAL ASSETS":"TotalAssets"
+            }
+        },
+        "Liabilities":{
+            "rows to extract":[
+                "Amounts owing to credit institutions and similar establishments",
+                "Customer deposits",
+                "Share capital",
+                "TOTAL LIABILITIES"
+            ],
+            "standardization":{
+                "Amounts owing to credit institutions and similar establishments":"InstitutionsCredit",
+                "Customer deposits":"CustomersCredit",
+                "Share capital":"PrivateEquity",
+                "TOTAL LIABILITIES":"TotalLiabilities"
+            }
+        },
+        "IncomeStatement":{
+            "rows to extract":[
+                "NET BANKING INCOME",
+                "OPERATING EXPENSES",
+                "NET INCOME FOR THE FINANCIAL YEAR"
+            ],
+            "standardization":{
+                "NET BANKING INCOME":"NetBankingIncome",
+                "OPERATING EXPENSES":"OperatingExpenses",
+                "NET INCOME FOR THE FINANCIAL YEAR":"NetIncome"
+            }
+        }
+    },
+
+    "ATWQ22025.xlsx":{
+        "ConsolidatedAssets":{},
+        "ConsolidatedLiabilities":{},
+        "ConsolidatedIncomeStatement":{},
+        "Assets":{},
+        "Liabilities":{},
+        "IncomeStatement":{}
+    },
+
+    "ATWQ32025.xlsx":{
+        "ConsolidatedAssets":{},
+        "ConsolidatedLiabilities":{},
+        "ConsolidatedIncomeStatement":{},
+        "Assets":{},
+        "Liabilities":{},
+        "IncomeStatement":{}
+    }
+    
+}
