@@ -2,6 +2,7 @@
 
 SELECT
     Bank,Date,Year,Quarter,
+    NetResults,
     TotalAssets,
     TotalLiabilities,
     Equity,
@@ -12,7 +13,7 @@ SELECT
     ROUND(TotalAssets / NULLIF(Equity, 0), 4)            AS Leverage,
     ROUND(Equity / NULLIF(TotalAssets, 0), 4)            AS EquityRatio,
     ROUND(Loans / NULLIF(Deposits, 0), 4)                 AS LoanstoDeposits,
-    Account, StatementType
+    Account
     
 
 FROM {{ref('IntermediateMetrics')}}

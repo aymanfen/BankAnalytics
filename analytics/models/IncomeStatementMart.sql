@@ -17,7 +17,7 @@ SELECT
     -- Other Indicators
     ROUND(NetResults / NULLIF(PNB, 0), 4)             AS NetMargin,
     ROUND(OperatingExpenses / NULLIF(PNB, 0), 4)      AS CosttoIncome,
-    Account, StatementType
+    Account
 
 FROM {{ref('IntermediateMetrics')}}
 WINDOW

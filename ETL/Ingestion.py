@@ -3,16 +3,14 @@ import pandas as pd
 from clickhouse_driver import Client
 import sys
 
-# -------------------------------------------------
-# Get filename from command line argument
-# -------------------------------------------------
+
 if len(sys.argv) < 2:
     print("Usage: python load_to_clickhouse.py <excel_file>")
     sys.exit(1)
 
 filename = sys.argv[1]
 
-dfs = pd.read_excel(f"Reports/Cleaned/{filename}", header=None, sheet_name=None)
+dfs = pd.read_excel(f"../Reports/Cleaned/{filename}", header=None, sheet_name=None)
 
 # ClickHouse connection
 client = Client(
@@ -72,5 +70,3 @@ for sheetname, df in dfs.items():
         """,
         data
     )
-
-print(f"Loaded {filename} into ClickHouse successfully.")

@@ -6,9 +6,6 @@ import re
 import sys
 
 
-# -------------------------------------------------------
-# ARGUMENT
-# -------------------------------------------------------
 if len(sys.argv) < 2:
     print("Usage: python script.py <excel_file>")
     sys.exit(1)
@@ -23,17 +20,13 @@ bank = filename[:3]
 config_file = f"Config/{bank}.json"
 
 
-# -------------------------------------------------------
 # LOAD CONFIG
-# -------------------------------------------------------
 def load_config(path):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-# -------------------------------------------------------
 # NORMALIZE TEXT
-# -------------------------------------------------------
 def normalize_text(text):
     if not isinstance(text, str):
         return ""
@@ -50,9 +43,7 @@ def normalize_text(text):
     return text.strip()
 
 
-# -------------------------------------------------------
 # NUMBER DETECTION
-# -------------------------------------------------------
 def is_number(s):
 
     s = str(s).strip()
@@ -68,9 +59,7 @@ def is_number(s):
     return test.isdigit()
 
 
-# -------------------------------------------------------
 # FIND INDICATOR (supports multi-line)
-# -------------------------------------------------------
 def find_indicator(lines, start_index, indicators):
 
     combined = normalize_text(lines[start_index])
@@ -92,9 +81,7 @@ def find_indicator(lines, start_index, indicators):
     return None, start_index
 
 
-# -------------------------------------------------------
 # PROCESS SHEET
-# -------------------------------------------------------
 def process_sheet(lines, sheet_config):
 
     indicators = sheet_config.get("rows to extract", [])
@@ -104,6 +91,10 @@ def process_sheet(lines, sheet_config):
 
     result = []
     i = 0
+
+    if len(lines)>=3:
+        result.extend([x for x in lines[:3]])
+        i=3
 
     while i < len(lines):
 
@@ -142,10 +133,7 @@ def process_sheet(lines, sheet_config):
     return result
 
 
-# -------------------------------------------------------
 # MAIN
-# -------------------------------------------------------
-
 config = load_config(config_file)
 
 if filename not in config:
@@ -186,16 +174,14 @@ for sheet in sheet_names:
 
     ws = wb.create_sheet(title=sheet)
 
-    ws["A1"] = "Results"
+    
     ws.column_dimensions["A"].width = 80
 
-    for idx, val in enumerate(result, start=2):
+    for idx, val in enumerate(result, start=1):
         ws[f"A{idx}"] = val
 
+    ws["A1"] = "Results"
     print(f"  Extracted {len(result)//3} indicators")
 
 
 wb.save(output_file)
-
-print("\nDone")
-print(f"Saved cleaned file → {output_file}")

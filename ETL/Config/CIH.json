@@ -1,0 +1,334 @@
+{
+    "CIHQ12025.xlsx":{
+        "ConsolidatedAssets":{
+            "rows to extract":[
+                "Prêts et créances sur les établissements de crédit et assimilés, au coût amorti",
+                "Prêts et créances sur la clientèle, au coût amorti",
+                "TOTAL ACTIF"],
+            "standardization":{
+                "Prêts et créances sur les établissements de crédit et assimilés, au coût amorti":
+                "InstitutionsLoans",
+                "Prêts et créances sur la clientèle, au coût amorti":
+                "CustomersLoans",
+                "TOTAL ACTIF":
+                "TotalAssets"
+            }
+        },
+        "ConsolidatedLiabilities":{
+            "rows to extract":[
+                "Dettes envers les établissements de crédit et assimilés",
+                "Dettes envers la clientèle",
+                "Capitaux propres",
+                "TOTAL PASSIF"],
+            "standardization":{
+                "Dettes envers les établissements de crédit et assimilés":
+                "InstitutionsCredit",
+                "Dettes envers la clientèle":
+                "CustomersCredit",
+                "Capitaux propres":
+                "PrivateEquity",
+                "TOTAL PASSIF":
+                "TotalLiabilities"
+            }
+        },
+        "ConsolidatedIncomeStatement":{
+            "rows to extract":[
+                "PRODUIT NET BANCAIRE",
+                "Charges générales d'exploitation",
+                "RÉSULTAT NET"
+            ],
+            "standardization":{
+                "PRODUIT NET BANCAIRE":"NetBankingIncome",
+                "Charges générales d'exploitation":"OperatingExpenses",
+                "RÉSULTAT NET":"NetIncome"
+            }
+        },
+        "Assets":{
+            "rows to extract":[
+                "Créances sur les établissements de crédit et assimilés",
+                "Créances sur la clientèle",
+                "Total de l'Actif"
+            ],
+            "standardization":{
+                "Créances sur les établissements de crédit et assimilés":"InstitutionsLoans",
+                "Créances sur la clientèle":"CustomersLoans",
+                "Total de l'Actif":"TotalAssets"
+            }
+        },
+        "Liabilities":{
+            "rows to extract":[
+                "Dettes envers les établissements de crédit et assimilés",
+                "Dépôts de la clientèle",
+                "Capital",
+                "Total du passif"
+            ],
+            "standardization":{
+                "Dettes envers les établissements de crédit et assimilés":"InstitutionsCredit",
+                "Dépôts de la clientèle":"CustomersCredit",
+                "Capital":"PrivateEquity",
+                "Total du passif":"TotalLiabilities"
+            }
+        },
+        "IncomeStatement":{
+            "rows to extract":[
+                "PRODUIT NET BANCAIRE",
+                "CHARGES GENERALES D'EXPLOITATION",
+                "RESULTAT NET DE L'EXERCICE"
+            ],
+            "standardization":{
+                "PRODUIT NET BANCAIRE":"NetBankingIncome",
+                "CHARGES GENERALES D'EXPLOITATION":"OperatingExpenses",
+                "RESULTAT NET DE L'EXERCICE":"NetIncome"
+            }
+        }
+    },
+
+    "CIHQ22025.xlsx":{
+        "ConsolidatedAssets":{
+            "rows to extract":[
+                "Prêts et créances sur les établissements de crédit et assimilés, au coût amorti",
+                "Prêts et créances sur la clientèle, au coût amorti",
+                "TOTAL ACTIF"],
+            "standardization":{
+                "Prêts et créances sur les établissements de crédit et assimilés, au coût amorti":
+                "InstitutionsLoans",
+                "Prêts et créances sur la clientèle, au coût amorti":
+                "CustomersLoans",
+                "TOTAL ACTIF":
+                "TotalAssets"
+            }
+        },
+        "ConsolidatedLiabilities":{
+            "rows to extract":[
+                "Dettes envers les établissements de crédit et assimilés",
+                "Dettes envers la clientèle",
+                "Capitaux propres",
+                "TOTAL PASSIF"],
+            "standardization":{
+                "Dettes envers les établissements de crédit et assimilés":"InstitutionsCredit",
+                "Dettes envers la clientèle":"CustomersCredit",
+                "Capitaux propres":"PrivateEquity",
+                "TOTAL PASSIF":"TotalLiabilities"
+            }
+        },
+        "ConsolidatedIncomeStatement":{
+            "rows to extract":[
+                "PRODUIT NET BANCAIRE",
+                "Charges générales d'exploitation",
+                "RESULTAT NET"
+            ],
+            "standardization":{
+                "PRODUIT NET BANCAIRE":"NetBankingIncome",
+                "Charges générales d'exploitation":"OperatingExpenses",
+                "RESULTAT NET":"NetIncome"
+            }
+        },
+        "Assets":{
+            "rows to extract":[
+                "Créances sur les établissements de crédit et assimilés",
+                "Créances sur la clientèle",
+                "Total de l'Actif"
+            ],
+            "standardization":{
+                "Créances sur les établissements de crédit et assimilés":"InstitutionsLoans",
+                "Créances sur la clientèle":"CustomersLoans",
+                "Total de l'Actif":"TotalAssets"
+            }
+        },
+        "Liabilities":{
+            "rows to extract":[
+                "Dettes envers les établissements de crédit et assimilés",
+                "Dépôts de la clientèle",
+                "Capital",
+                "Total du passif"
+            ],
+            "standardization":{
+                "Dettes envers les établissements de crédit et assimilés":"InstitutionsCredit",
+                "Dépôts de la clientèle":"CustomersCredit",
+                "Capital":"PrivateEquity",
+                "Total du passif":"TotalLiabilities"
+            }
+        },
+        "IncomeStatement":{
+            "rows to extract":[
+                "PRODUIT NET BANCAIRE",
+                "CHARGES GENERALES D'EXPLOITATION",
+                "RESULTAT NET DE L'EXERCICE"
+            ],
+            "standardization":{
+                "PRODUIT NET BANCAIRE":"NetBankingIncome",
+                "CHARGES GENERALES D'EXPLOITATION":"OperatingExpenses",
+                "RESULTAT NET DE L'EXERCICE":"NetIncome"
+            }
+        }
+    },
+
+    "CIHQ32025.xlsx":{
+        "ConsolidatedAssets":{
+            "rows to extract":[
+                "Prêts et créances sur les établissements de crédit et assimilés, au coût amorti",
+                "Prêts et créances sur la clientèle, au coût amorti",
+                "TOTAL ACTIF"],
+            "standardization":{
+                "Prêts et créances sur les établissements de crédit et assimilés, au coût amorti":
+                "InstitutionsLoans",
+                "Prêts et créances sur la clientèle, au coût amorti":
+                "CustomersLoans",
+                "TOTAL ACTIF":
+                "TotalAssets"
+            }
+        },
+        "ConsolidatedLiabilities":{
+            "rows to extract":[
+                "Dettes envers les établissements de crédit et assimilés",
+                "Dettes envers la clientèle",
+                "Capitaux propres",
+                "TOTAL PASSIF"],
+            "standardization":{
+                "Dettes envers les établissements de crédit et assimilés":
+                "InstitutionsCredit",
+                "Dettes envers la clientèle":
+                "CustomersCredit",
+                "Capitaux propres":
+                "PrivateEquity",
+                "TOTAL PASSIF":
+                "TotalLiabilities"
+            }
+        },
+        "ConsolidatedIncomeStatement":{
+            "rows to extract":[
+                "PRODUIT NET BANCAIRE",
+                "Charges générales d'exploitation",
+                "RESULTAT NET"
+            ],
+            "standardization":{
+                "PRODUIT NET BANCAIRE":"NetBankingIncome",
+                "Charges générales d'exploitation":"OperatingExpenses",
+                "RESULTAT NET":"NetIncome"
+            }
+        },
+        "Assets":{
+            "rows to extract":[
+                "Créances sur les établissements de crédit et assimilés",
+                "Créances sur la clientèle",
+                "Total de l'Actif"
+            ],
+            "standardization":{
+                "Créances sur les établissements de crédit et assimilés":"InstitutionsLoans",
+                "Créances sur la clientèle":"CustomersLoans",
+                "Total de l'Actif":"TotalAssets"
+            }
+        },
+        "Liabilities":{
+            "rows to extract":[
+                "Dettes envers les établissements de crédit et assimilés",
+                "Dépôts de la clientèle",
+                "Capital",
+                "Total du passif"
+            ],
+            "standardization":{
+                "Dettes envers les établissements de crédit et assimilés":"InstitutionsCredit",
+                "Dépôts de la clientèle":"CustomersCredit",
+                "Capital":"PrivateEquity",
+                "Total du passif":"TotalLiabilities"
+            }
+        },
+        "IncomeStatement":{
+            "rows to extract":[
+                "PRODUIT NET BANCAIRE",
+                "CHARGES GENERALES D'EXPLOITATION",
+                "RESULTAT NET DE L'EXERCICE"
+            ],
+            "standardization":{
+                "PRODUIT NET BANCAIRE":"NetBankingIncome",
+                "CHARGES GENERALES D'EXPLOITATION":"OperatingExpenses",
+                "RESULTAT NET DE L'EXERCICE":"NetIncome"
+            }
+        }
+    },
+
+    "CIHQ42025.xlsx":{
+        "ConsolidatedAssets":{
+            "rows to extract":[
+                "Prêts et créances sur les établissements de crédit et assimilés, au coût amorti",
+                "Prêts et créances sur la clientèle, au coût amorti",
+                "TOTAL ACTIF"],
+            "standardization":{
+                "Prêts et créances sur les établissements de crédit et assimilés, au coût amorti":
+                "InstitutionsLoans",
+                "Prêts et créances sur la clientèle, au coût amorti":
+                "CustomersLoans",
+                "TOTAL ACTIF":
+                "TotalAssets"
+            }
+        },
+        "ConsolidatedLiabilities":{
+            "rows to extract":[
+                "Dettes envers les établissements de crédit et assimilés",
+                "Dettes envers la clientèle",
+                "Capitaux propres",
+                "TOTAL PASSIF"],
+            "standardization":{
+                "Dettes envers les établissements de crédit et assimilés":
+                "InstitutionsCredit",
+                "Dettes envers la clientèle":
+                "CustomersCredit",
+                "Capitaux propres":
+                "PrivateEquity",
+                "TOTAL PASSIF":
+                "TotalLiabilities"
+            }
+        },
+        "ConsolidatedIncomeStatement":{
+            "rows to extract":[
+                "PRODUIT NET BANCAIRE",
+                "Charges générales d'exploitation",
+                "RESULTAT NET"
+            ],
+            "standardization":{
+                "PRODUIT NET BANCAIRE":"NetBankingIncome",
+                "Charges générales d'exploitation":"OperatingExpenses",
+                "RESULTAT NET":"NetIncome"
+            }
+        },
+        "Assets":{
+            "rows to extract":[
+                "Créances sur les établissements de crédit et assimilés",
+                "Créances sur la clientèle",
+                "Total de l'Actif"
+            ],
+            "standardization":{
+                "Créances sur les établissements de crédit et assimilés":"InstitutionsLoans",
+                "Créances sur la clientèle":"CustomersLoans",
+                "Total de l'Actif":"TotalAssets"
+            }
+        },
+        "Liabilities":{
+            "rows to extract":[
+                "Dettes envers les établissements de crédit et assimilés",
+                "Dépôts de la clientèle",
+                "Capital",
+                "Total du passif"
+            ],
+            "standardization":{
+                "Dettes envers les établissements de crédit et assimilés":"InstitutionsCredit",
+                "Dépôts de la clientèle":"CustomersCredit",
+                "Capital":"PrivateEquity",
+                "Total du passif":"TotalLiabilities"
+            }
+        },
+        "IncomeStatement":{
+            "rows to extract":[
+                "PRODUIT NET BANCAIRE",
+                "CHARGES GENERALES D'EXPLOITATION",
+                "RESULTAT NET DE L'EXERCICE"
+            ],
+            "standardization":{
+                "PRODUIT NET BANCAIRE":"NetBankingIncome",
+                "CHARGES GENERALES D'EXPLOITATION":"OperatingExpenses",
+                "RESULTAT NET DE L'EXERCICE":"NetIncome"
+            }
+        }
+    }
+    
+}

@@ -8,35 +8,28 @@ SELECT
 
     sumIf(IndicatorValue, IndicatorName = 'NetBankingIncome') AS PNB,
     sumIf(IndicatorValue, IndicatorName = 'NetIncome') AS NetResults,
-    sumIf(IndicatorValue, IndicatorName = 'OperatingExpenses') AS OperatingExpenses,
+    ABS(sumIf(IndicatorValue, IndicatorName = 'OperatingExpenses')) AS OperatingExpenses,
 
     sumIf(IndicatorValue, IndicatorName = 'TotalAssets') AS TotalAssets,
     sumIf(IndicatorValue, IndicatorName = 'TotalLiabilities') AS TotalLiabilities,
     sumIf(IndicatorValue, IndicatorName = 'PrivateEquity') AS Equity,
 
-    sumIf(
-        IndicatorValue,
-        IndicatorName IN ('InstitutionsLoans','CustomersLoans')
-    ) AS Loans,
+    sumIf(IndicatorValue, IndicatorName IN ('InstitutionsLoans','CustomersLoans')) AS Loans,
+    sumIf(IndicatorValue, IndicatorName IN ('InstitutionsCredit','CustomersCredit')) AS Deposits,
 
-    sumIf(
-        IndicatorValue,
-        IndicatorName IN ('InstitutionsCredit','CustomersCredit')
-    ) AS Deposits,
+    Account
 
-    CASE
-        WHEN Type LIKE '%Consolidated%' THEN 'Consolidated'
-        ELSE 'Normal'
-    END AS Account,
+FROM (
 
-    CASE
-        WHEN Type LIKE '%IncomeStatement%' THEN 'IncomeStatement'
-        WHEN Type LIKE '%Assets%' THEN 'Assets'
-        WHEN Type LIKE '%Liabilities%' THEN 'Liabilities'
-    END AS StatementType
+    SELECT *,
+        CASE
+            WHEN Type LIKE '%Consolidated%' THEN 'Consolidated'
+            ELSE 'Normal'
+        END AS Account
+    FROM analytics.stg
 
-FROM analytics.stg
+)
 
-GROUP BY Date, Bank, Type
+GROUP BY Date, Bank, Account
 
 ORDER BY Date, Bank
